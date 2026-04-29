@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: helloapp
+  template:
+    metadata:
+      labels:
+        app: helloapp
+    spec:
+      containers:
+        - name: helloapp
+          image: embarkx/hello-node:latest
+          env:
+            - name: ENV_VALUE
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: ENV_VALUE 
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: helloapp
+spec:
+  selector:
+    app: helloapp
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 3000
+      nodePort: 30003
