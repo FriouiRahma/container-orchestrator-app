@@ -1,0 +1,67 @@
+# services:
+#   service-a:
+#     build: ./node/service-a
+#     image: rahmafrioui/service-a-compose:0.1
+#     depends_on:
+#       - service-b
+#     ports:
+#       - 3100:3000
+#     environment:
+#       - TAX_SERVICE_URL=http://service-b:4000
+#   service-b:
+#    build: ./node/service-b
+#    image: rahmafrioui/service-b-compose:0.1
+#    ports:
+#      - 3200:4000 
+
+# services:
+#   service-sp-a:
+#     build: ./spring/service-a
+#     image: rahmafrioui/service-sp-a-compose:0.1
+#     depends_on:
+#       - service-sp-b
+#     ports:
+#       - 3300:3000
+#     environment:
+#       - TAX_SERVICE_URL=http://service-sp-b:4000
+#   service-sp-b:
+#    build: ./spring/service-b
+#    image: rahmafrioui/service-sp-b-compose:0.1
+#    ports:
+#      - 3200:4000 
+
+services:
+  service-py-a:
+    build: ./python/service-a
+    image: rahmafrioui/service-py-a-compose:0.1
+    depends_on:
+      - service-py-b
+    ports:
+      - 3200:3000
+    environment:
+      - TAX_SERVICE_URL=http://service-py-b:4000
+      - FRONTEND_URL=http://localhost:5173
+    networks:
+      - tax-network
+  service-py-b:
+    build: ./python/service-b
+    image: rahmafrioui/service-py-b-compose:0.1
+    ports:
+      - 3300:4000
+    networks:
+      - tax-network
+  front-end:
+    build: ./tax-calculator-frontend
+    image: rahmafrioui/tax-calculator-frontend-compose:0.1
+    ports:
+      - 5173:80
+    depends_on:
+      - service-py-a
+    environment:
+      - VITE_API_URL=http://localhost:3100
+    networks:
+      - tax-network
+      
+networks:
+  tax-network:
+    driver: bridge

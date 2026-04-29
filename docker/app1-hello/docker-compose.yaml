@@ -1,0 +1,22 @@
+services:
+  python-app:
+    build: ./python
+    image: rahmafrioui/python-image-compose:0.1
+    ports: 
+      - 3000:3000
+    environment:
+      - ENV_VALUE=${ENV_VALUE_PYTHON}
+  node-app:
+    build: ./node
+    image: rahmafrioui/node-image-compose:0.1
+    ports:
+      - 3001:3000
+    environment:
+      - ENV_VALUE=${ENV_VALUE_NODE}
+  springboot-app:
+    build: ./springboot/hello-spring
+    image: rahmafrioui/springboot-image-compose:0.1
+    ports:
+      - 8083:8080
+    environment:
+      - ENV_VALUE=${ENV_VALUE_SPRINGBOOT}
