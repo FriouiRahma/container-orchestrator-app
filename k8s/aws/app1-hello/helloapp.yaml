@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: helloapp
+  template:
+    metadata:
+      labels:
+        app: helloapp
+    spec:
+      containers:
+        - name: helloapp
+          image: embarkx/hello-node:latest
+          env:
+            - name: ENV_VALUE
+              value: "Hello from AWS EKS!"
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: helloapp
+spec:
+  selector:
+    app: helloapp
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 3000
