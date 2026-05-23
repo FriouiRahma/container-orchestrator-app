@@ -1,8 +1,8 @@
-name: node pipeline ci
+name: Hello Node App To Docker
 on:
   push:
     paths:
-      - "docker/app1-hello/nodejs/node"
+      - "docker/app1-hello/node"
   workflow_dispatch:
 jobs:   
   build-test:
