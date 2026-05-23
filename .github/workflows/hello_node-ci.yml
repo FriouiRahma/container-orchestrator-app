@@ -17,11 +17,11 @@ jobs:
             node-version: 25
 
       - name: Install dependencies
-        working-directory: docker/app1-hello/nodejs/node
+        working-directory: docker/app1-hello/node
         run: npm ci
 
       - name: Run tests (If any)
-        working-directory: docker/app1-hello/nodejs/node
+        working-directory: docker/app1-hello/node
         run: npm test --if-present
 
   docker-build-push:
@@ -40,7 +40,7 @@ jobs:
     - name: Build and Push Docker Image 
       uses: docker/build-push-action@v7
       with:
-        context: ./docker/app1-hello/nodejs/node
+        context: ./docker/app1-hello/node
         push: true
         tags: |
           ${{ secrets.DOCKER_USERNAME }}/hello-node:latest
