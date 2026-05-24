@@ -82,7 +82,7 @@ jobs:
           aws eks update-kubeconfig --name hello-cluster --region us-east-1 
       
       - name: Verify connection to EKS cluster
-        uses: kubectl get nodes
+        run: kubectl get nodes
       
       - name: Deploy to AWS EKS (kubernetes)
         run:  kubectl apply -f k8s/aws/app1-hello/helloapp.yaml
