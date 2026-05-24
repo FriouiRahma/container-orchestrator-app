@@ -46,29 +46,30 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/hello-node:latest
             ${{ secrets.DOCKER_USERNAME }}/hello-node:${{ github.sha }}
             ${{ secrets.DOCKER_USERNAME }}/hello-node:${{ github.ref_name }}
- docker-build-push:
+
+  deploy-aws-eks:
     runs-on: ubuntu-latest
     needs: docker-build-push
     steps:
-      - name: checkout code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-     - name: Configure AWS Credentials
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v6.1.0
         with:
-            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws-region: us-east-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
 
-     - name: Set up kubectl
+      - name: Set up kubectl
         uses: azure/setup-kubectl@v4
-    
-    - name: Update kubeconfig for AWS EKS
-      run: |
-        aws eks update-kubeconfig --name hello-cluster --region us-east-1 
-    
-    - name: verify connection to cluster
-      run: kubectl get nodes
-    
-    - name: Deploy to AWS EKS
-      run: kubectl apply -f k8s/aws/app1-hello/helloapp.yaml
+
+      - name: Update kubeconfig for AWS EKS
+        run: |
+          aws eks update-kubeconfig --name hello-cluster --region us-east-1
+
+      - name: verify connection to cluster
+        run: kubectl get nodes
+
+      - name: Deploy to AWS EKS
+        run: kubectl apply -f k8s/aws/app1-hello/helloapp.yaml
