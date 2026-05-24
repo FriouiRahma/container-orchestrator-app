@@ -14,12 +14,12 @@ spec:
     spec:
       containers:
         - name: helloapp
-          image: rahmafrioui/hello-spring:latest
+          image: rahmafrioui/hello-node:latest
           env:
             - name: ENV_VALUE
               value: "Hello from AWS EKS!"
           ports:
-            - containerPort: 8080
+            - containerPort: 3000
 ---
 apiVersion: v1
 kind: Service
@@ -31,4 +31,4 @@ spec:
   type: LoadBalancer
   ports:
     - port: 80
-      targetPort: 8080
+      targetPort: 3000
