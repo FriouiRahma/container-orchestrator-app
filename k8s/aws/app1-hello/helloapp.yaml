@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: helloapp
-          image: rahmafrioui/hello-node:latest
+          image: rahmafrioui/hello-python:latest
           env:
             - name: ENV_VALUE
               value: "Hello from AWS EKS!"
