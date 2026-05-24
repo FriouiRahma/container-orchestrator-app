@@ -1,4 +1,4 @@
-name: Hello Python App To Docker
+name: Hello Python App To AWS EKS
 on:
   push:
     paths:
