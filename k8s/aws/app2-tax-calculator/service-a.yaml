@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-a
-          image: rahmafrioui/tax-service-a:latest
+          image: rahmafrioui/tax-service-a:python-latest
           env:
             - name: PORT
               value: "3000"
