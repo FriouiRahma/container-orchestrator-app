@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: rahmafrioui/tax-calculator:latest
+          image: rahmafrioui/tax-calculator-frontend:latest
           env:
             - name: PORT
               value: "4000"
