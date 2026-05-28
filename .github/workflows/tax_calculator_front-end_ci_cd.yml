@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: create .env file for docker build
-        working-directory: docker/app2-tax-calculator/frontend
+        working-directory: docker/app2-tax-calculator/tax-calculator-frontend
         run: echo "VITE_API_URL=/api" > .env 
 
       - name: setup Node.js
@@ -20,15 +20,15 @@ jobs:
           node-version: 25
 
       - name: Install dependencies
-        working-directory: docker/app2-tax-calculator/frontend
+        working-directory: docker/app2-tax-calculator/tax-calculator-frontend
         run: npm ci
       
       - name: Run tests (If any)
-        working-directory: docker/app2-tax-calculator/frontend
+        working-directory: docker/app2-tax-calculator/tax-calculator-frontend
         run: npm test --if-present
 
       - name: Build frontend
-        working-directory: docker/app2-tax-calculator/frontend
+        working-directory: docker/app2-tax-calculator/tax-calculator-frontend
         run: npm run build
 
   docker-build-push:
@@ -46,13 +46,13 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       
       - name: create .env file for docker build
-        working-directory: docker/app2-tax-calculator/frontend
+        working-directory: docker/app2-tax-calculator/tax-calculator-frontend
         run: echo "VITE_API_URL=/api" > .env
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v7
         with:
-          context: docker/app2-tax-calculator/frontend
+          context: docker/app2-tax-calculator/tax-calculator-frontend
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/tax-calculator-frontend:latest
