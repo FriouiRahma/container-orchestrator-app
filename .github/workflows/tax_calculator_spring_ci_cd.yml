@@ -90,6 +90,6 @@ jobs:
         run: kubectl get nodes
       
       - name: Deploy to AWS EKS (kubernetes)
-        run:  |
-          kubectl apply -f k8s/aws/app2-tax-calculator/service-a
-          kubectl apply -f k8s/aws/app2-tax-calculator/service-b
+        run: |
+          kubectl apply -f k8s/aws/app2-tax-calculator/service-a.yaml
+          kubectl apply -f k8s/aws/app2-tax-calculator/service-b.yaml
