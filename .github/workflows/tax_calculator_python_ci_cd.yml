@@ -12,11 +12,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
+        
       - name: setup python
-        - uses: actions/setup-python@v6
-          with:
-            python-version: '3.13'
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
 
       - name: Installing dependencies
         working-directory: docker/app2-tax-calculator/python/${{ matrix.service }}
