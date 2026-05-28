@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-a
-          image: embarkx/tax-service-a:latest
+          image: rahmafrioui/tax-service-a:latest
           env:
             - name: PORT
               value: "3000"
