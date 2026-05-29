@@ -20,7 +20,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: docker/app2-tax-calculator/node/${{ matrix.service }}
-        run: npm ci
+        run: npm install
 
       - name: Run tests (If any)
         working-directory: docker/app2-tax-calculator/node/${{ matrix.service }}
