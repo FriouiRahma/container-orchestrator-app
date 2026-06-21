@@ -10,4 +10,4 @@
 
     bucket_name = "test-demo-bucket-86576468784"
     bucket_purpose = "test-demo"
-    enable_versioning = false
+    enable_versioning = true
